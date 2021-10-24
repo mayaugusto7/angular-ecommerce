@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
   currentCategoryId: number | undefined;
+  currentCategoryName: string | null = '';
 
   constructor(
     private productService: ProductService,
@@ -31,8 +32,12 @@ export class ProductListComponent implements OnInit {
       // get the "id" param string. convert string to a number using the "+" symbol
       // @ts-ignore
       this.currentCategoryId = +this.route.snapshot.paramMap.get('id');
+
+      // get the name
+      this.currentCategoryName = this.route.snapshot.paramMap.get('name');
     } else {
       this.currentCategoryId = 1;
+      this.currentCategoryName = 'Books';
     }
 
     // now get the products for the given category id
